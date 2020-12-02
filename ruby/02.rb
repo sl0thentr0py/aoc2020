@@ -1,8 +1,10 @@
 class Password
+  REGEX = /(\d+)-(\d+) (.): (.*)/
+
   def initialize(s)
-    policy, @pass = s.split(': ')
-    range, @char = policy.split(' ')
-    @min, @max = range.split('-').map(&:to_i)
+    @min, @max, @char, @pass = s.match(REGEX).captures
+    @min = @min.to_i
+    @max = @max.to_i
   end
 
   def valid1?
